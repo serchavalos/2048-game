@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>2048 Game</h1>
+        <div class="current-score">
+          <h5>Score</h5>
+          <p></p>
+        </div>
+      </header>
+      <section class="game-container">
+        <div class="base-grid">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div id="game-grid"></div>
+        <div class="modal game-over">
+          <article>
+            <h2>Game over!</h2>
+            <button>Try again</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

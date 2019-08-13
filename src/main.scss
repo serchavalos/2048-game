@@ -1,0 +1,240 @@
+/* Inspired by https://play2048.co/ */
+@import "./_animations.scss";
+
+:root {
+  --main-color: #776e65;
+  --main-bg-color: #bbada0;
+  --square-size: 6.5rem;
+  --score-label-color: #eee4da;
+  --empty-bg-color: #eee4da59;
+}
+
+body {
+  color: var(--main-color);
+  font-family: "Roboto", sans-serif;
+}
+
+main {
+  width: 31rem;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+header {
+  display: flex;
+  flex: 1 0;
+  align-items: baseline;
+  margin: 2rem 0;
+
+  h1 {
+    align-self: flex-start;
+    text-align: left;
+    font-size: 3rem;
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .current-score {
+    background-color: var(--main-bg-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+
+    h5 {
+      margin: 0;
+      padding: 0;
+      color: var(--score-label-color);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 1.1rem;
+      color: white;
+      text-align: center;
+      font-weight: 500;
+    }
+  }
+}
+
+.game-container {
+  position: relative;
+}
+
+.base-grid {
+  display: grid;
+  grid-template: repeat(4, var(--square-size)) / repeat(4, var(--square-size));
+  grid-gap: 1rem;
+  width: 31rem;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--main-bg-color);
+  box-sizing: border-box;
+  border-radius: 0.3rem;
+
+  & > div {
+    line-height: var(--square-size);
+    border-radius: 0.3rem;
+  }
+
+  & > div:empty {
+    background-color: var(--empty-bg-color);
+  }
+}
+
+#game-grid {
+  .item {
+    line-height: var(--square-size);
+    border-radius: 0.3rem;
+  }
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+
+  .item {
+    cursor: pointer;
+    position: absolute;
+    transition: transform 0.2s;
+    width: var(--square-size);
+    height: var(--square-size);
+
+    /* Positions */
+    @for $col from 0 through 3 {
+      @for $row from 0 through 3 {
+        &.position_#{$col}_#{$row} {
+          transform: translate(#{$col * 7.5}rem, #{$row * 7.5}rem);
+        }
+      }
+    }
+
+    & .inner-text {
+      font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+      text-align: center;
+      font-weight: 600;
+      font-size: 2.8rem;
+      border-radius: 0.3rem;
+      animation: grow 0.1s ease-out;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Colors by score */
+    &.item-1 .inner-text {
+      background: #eee4da;
+    }
+    &.item-2 .inner-text {
+      background: #eee4da;
+      box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0),
+        inset 0 0 0 1px rgba(255, 255, 255, 0);
+    }
+    &.item-4 .inner-text {
+      background: #ede0c8;
+      box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0),
+        inset 0 0 0 1px rgba(255, 255, 255, 0);
+    }
+    &.item-8 .inner-text {
+      color: #f9f6f2;
+      background: #f2b179;
+    }
+    &.item-16 .inner-text {
+      color: #f9f6f2;
+      background: #f59563;
+    }
+    &.item-32 .inner-text {
+      color: #f9f6f2;
+      background: #f67c5f;
+    }
+    &.item-64 .inner-text {
+      color: #f9f6f2;
+      background: #f65e3b;
+    }
+    &.item-128 .inner-text {
+      color: #f9f6f2;
+      background: #edcf72;
+      box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
+      font-size: 45px;
+    }
+    &.item-256 .inner-text {
+      color: #f9f6f2;
+      background: #edcc61;
+      box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
+      font-size: 45px;
+    }
+    &.item-512 .inner-text {
+      color: #f9f6f2;
+      background: #edc850;
+      box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
+      font-size: 45px;
+    }
+    &.item-1024 .inner-text {
+      color: #f9f6f2;
+      background: #edc53f;
+      box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
+      font-size: 35px;
+    }
+    &.item-2048 .inner-text {
+      color: #f9f6f2;
+      background: #edc22e;
+      box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.55556),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+      font-size: 35px;
+    }
+  }
+}
+
+.modal {
+  background-color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+
+  &.visible {
+    display: flex;
+  }
+
+  article {
+    display: block;
+    margin: auto;
+    padding: 0;
+  }
+
+  h2 {
+    color: inherit;
+    font-weight: bold;
+    font-size: 4rem;
+    text-align: center;
+    padding: 0;
+    margin: 0 0 1rem 0;
+  }
+
+  button {
+    background-color: var(--main-color);
+    color: white;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0 auto;
+    cursor: pointer;
+    outline: none;
+  }
+}
